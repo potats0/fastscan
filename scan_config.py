@@ -1,17 +1,13 @@
 #!/bin/env python
 # -*- coding:UTF-8 -*-
 import argparse
-import logging
 
 import netifaces
 from getmac import get_mac_address
 
-from cidr import cidr
 from packet import Packet
 from super_scan_c import raw_socket_init, get_adapter_ip
 from throttler import Throttler
-
-logger = logging.getLogger('flask.app.module')
 
 
 class PCAP_LINK_TYPE:
@@ -101,21 +97,3 @@ class Scan_Config:
 
     def get_task_status(self):
         return round(self.packets_sent / self.total, 2) * 100
-
-
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='快速端口扫描工具')
-    parser.add_argument('-IF', dest='input_file', metavar='cidr file',
-                        help='cidr，文件中每行一个目标')
-    parser.add_argument('-p', dest='port_list', metavar='80,443', default=80,
-                        help='扫描端口，多个用逗号分隔，默认80')
-    parser.add_argument('-pI', dest='port_file', metavar='ports.txt',
-                        help='扫描端口的文件，每行一个端口')
-    parser.add_argument('-i', dest='ifname', metavar='ifname', nargs=1, required=True,
-                        help='扫描器使用的网卡名字')
-    parser.add_argument('-r', dest='rate', metavar='pps', type=int, default=1000,
-                        help='packets per second，默认1000')
-    parser.add_argument('-o', dest='output', metavar='filepath', required=True,
-                        help='扫描结果的存储位置')
-    parser.add_argument('-t', dest='timeout', metavar='timeout', type=int, default=120,
-                        help='发送进程结束后接收线程等待的时间')

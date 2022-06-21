@@ -1,11 +1,10 @@
 #!/bin/env python
 # -*- coding:UTF-8 -*-
 import logging
-import sys
+import signal
 
 from scan_config import Scan_Config
 from utils import ip2int
-import signal
 
 logger = logging.getLogger('flask.app.module')
 
@@ -30,4 +29,5 @@ def transmit_thread(scan_config: Scan_Config):
                 # logger.info("队列无内容，正在准备退出中。。。。")
                 break
     logger.info(f"waiting {scan_config.timeout}s")
+    # 给自己发送定时信号，定时取消任务
     signal.alarm(scan_config.timeout)

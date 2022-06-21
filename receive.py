@@ -1,16 +1,10 @@
-import datetime
-import logging
-import sys
-
-import pymongo
-
-from scan_config import Scan_Config
+#!/bin/env python
+# -*- coding:UTF-8 -*-
 from ip_parse import prase_package
+from scan_config import Scan_Config
 from super_scan_c import rawsock_recv_packet
 from super_scan_c.SuperScan_C import pcap_close
 from utils import ip2int
-
-logger = logging.getLogger('flask.app.module')
 
 
 def receive_thread(scan_config: Scan_Config):
