@@ -12,3 +12,4 @@ RUN pip3 install -r requirements.txt
 WORKDIR super_scan_c
 RUN python3 setup.py build
 RUN cp build/lib*/* ./
+WORKDIR ..
