@@ -7,6 +7,7 @@ RUN apt-get update -y &&      apt-get install -y python3-pip python3-dev libpcap
 
 RUN git clone https://github.com/potats0/fastscan.git
 WORKDIR fastscan
+RUN ls
 RUN pip3 install -r requirements.txt
 WORKDIR super_scan_c
 RUN python3 setup.py build
