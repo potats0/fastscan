@@ -59,4 +59,4 @@ if __name__ == '__main__':
     # Options
     parser.add_argument('-u', '--url', help='root url', dest='root')
     args = parser.parse_args()
-    start_scan(['192.168.3.0/24'], [80], 'aaaa', 100, 10)
+    start_scan(['221.198.70.0/25'], [80], 'aaaa', 100, 10)
