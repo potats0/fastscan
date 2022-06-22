@@ -58,12 +58,12 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser = argparse.ArgumentParser(description='fastscan')
     parser.add_argument('cidr', metavar='N', type=str, nargs='+', help='cidr')
-    parser.add_argument('-p', dest='port_list', metavar='80 443', default=[80], nargs='+',
-                        type=int, help='扫描端口')
+    parser.add_argument('-p', dest='port_list', metavar='80,443', default=80,
+                        type=str, help='扫描端口')
     parser.add_argument('-r', dest='rate', metavar='pps', type=int, default=1000,
                         help='packets per second，默认1000')
     parser.add_argument('-t', dest='timeout', metavar='timeout', type=int, default=10,
                         help='发送进程结束后接收线程等待的时间')
     args = parser.parse_args()
     print(args)
-    start_scan(args.cidr, args.port_list, 'foru', args.rate, args.timeout)
+    start_scan(args.cidr, [int(i) for i in args.port_list.split(',')], 'foru', args.rate, args.timeout)
