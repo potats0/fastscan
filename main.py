@@ -57,7 +57,7 @@ signal.signal(signal.SIGINT, exit_sign_handler)
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser = argparse.ArgumentParser(description='fastscan')
-    parser.add_argument('cidr', metavar='N', type=str, nargs='+', help='cidr')
+    parser.add_argument('-i',dest='cidr', metavar='N', type=str, help='cidr')
     parser.add_argument('-p', dest='port_list', metavar='80,443', default=80,
                         type=str, help='扫描端口')
     parser.add_argument('-r', dest='rate', metavar='pps', type=int, default=1000,
@@ -66,4 +66,4 @@ if __name__ == '__main__':
                         help='发送进程结束后接收线程等待的时间')
     args = parser.parse_args()
     print(args)
-    start_scan(args.cidr, [int(i) for i in args.port_list.split(',')], 'foru', args.rate, args.timeout)
+    start_scan(args.cidr.split(','), [int(i) for i in args.port_list.split(',')], 'foru', args.rate, args.timeout)
